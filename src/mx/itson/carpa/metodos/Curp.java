@@ -13,15 +13,12 @@ import mx.itson.carpa.enumeradores.Sexo;
 public class Curp {
     
     /**
-     * Obtiene la información para establecer los dígitos de la CURP.param:obtenerPrimerLetraYVocalInterna, primeraLetraSegundoApellido,
- primerLetraNombrePila, obtenerFecha, obtenerCodigoEstado,
- primerConsonanteInternaSegundoApellido return: Los datos de la primera
- vocal interna, primera letra del segundo apellido, primera letra del
- primer nombre, fecha de nacimiento, código de estado y la primer
- consonante interna del segundo apellido
-     * @param nombres,
-     * @return
-     */
+     * Recibe los datos de la curp
+     * @return  Los datos de la primera vocal interna, primera letra del segundo apellido,
+       primera letra del primer nombre, fecha de nacimiento, código de estado y la primer
+       consonante interna del segundo apellido
+     * @param nombres, apellidoP, apellidoM, diaNacimiento, anioNacimiento, sexo, estado, 
+     */      
     public String sacarCurp(
             String nombres,
             String apellidoP,
@@ -55,9 +52,9 @@ public class Curp {
     }
     
     /**
-    * Limpia la palabra de espacios, reemplazando también los acentos de cada vocal haciendo que esta se convierta en mayúsculas.
-    * param: palabra 
-    * return: la palabra sin espacios al inicio ni al final, removiendo los acentos 
+    * Le da formato a las palabras, les quita espacios, reemplaza también los acentos de cada vocal haciendo que se conviertan en mayuscula.
+    * @param  palabra, 
+    * @return la palabra sin espacios al inicio ni al final, removiendo los acentos y en mayuscula
      */
     
     static String formato(String palabra) {
@@ -70,9 +67,10 @@ public class Curp {
     }
     
     /**
-* Obtiene la primera vocal interna de la palabra, empezando por la primera posición de caracteres saltando posiciónes hasta llegar a la vocal
- param: vocalApellido, palabra, vocales
- return: el caracter que sea la primera vocal interna del nombre.
+* Recibe la primera vocal de la palabra, empezando por la primera posición de caracteres saltando posiciónes que no cumplan con las caracteristicas 
+* hasta llegar a la vocal
+* @param  palabra, vocales
+* @return el caracter que sea la primera vocal interna del nombre.
  */
     
     static char vocalApellido(String palabra) {
@@ -88,9 +86,9 @@ public class Curp {
     }
     
     /**
-* Obtiene el primer caracter consonante interno del nombre o la palabra ingresada
- param: primerConsonanteApellido, palabra, vocales
- return: el caracter de la palabra que sea la primer consonante interna del nombre o palabra ingresada.
+* Recibe el primer caracter consonante del nombre o la palabra ingresada
+*@param  palabra, vocales,
+ *@return  el caracter de la palabra que sea la primer consonante del nombre o palabra ingresada.
  */
     static char primerConsonanteApellido(String palabra) {
         String vocales = "BCDFGHJKLMÑPQRSTVWXYZ";
@@ -104,9 +102,9 @@ public class Curp {
         return ' ';
     }
 /**
-* Obtiene la primer letra y vocal interna separándola con arreglo de caracteres, dependiendo la posición, la primera posición (0) se recorre.
-* param: obtenerPrimerLetraYVocalInterna palabra
-* return: la primera vocal interna de palabra
+* Recibe la primer letra y la vocal del apellido paterno separándola con arreglo de caracteres, dependiendo la posición, la primera posición (0) se recorre.
+* @param  palabra,
+* @return la primera vocal interna de palabra
  */
 
     static String letraYVocal(String palabra) {
@@ -115,45 +113,44 @@ public class Curp {
         return new String(letras);
     }
 /**
-* Obtiene la primera letra del primer apellido
- param: letraApellidoP, apellidoPaterno
- return: Un caracter que es la primera letra del primer apellido
+* Recibe la primera letra del apellido paterno
+ @param apellidoPaterno, 
+ @return Un caracter que es la primera letra del primer apellido
  */
     static public char letraApellidoP(String apellidoPaterno) {
         return apellidoPaterno.charAt(0);
     }
 /**
-* Obtiene la primera letra del segundo apellido
- param: letraApellidoP, segundoApellido
- return: Un caracter que es la primera letra del segundo apellido
+* Recibe la primera letra del apellido materno
+ @param segundoApellido,
+ @return Un caracter que es la primera letra del segundo apellido
  */
 
     static char letraApellidoM(String segundoApellido) {
         return segundoApellido.charAt(0);
     }
 /**
-* Obtiene el primer caracter del primer nombre
- param: letraNombre, nombrePila
- return: el caracter que se encuentra en la primera posición del nombre de pila o primer nombre
+* Recibe la primera letra del primer nombre
+ @param  nombrePila,
+ @return  el caracter que se encuentra en la primera posición del primer nombre
  */
-    static char letraNombre(String nombrePila) {
-        return nombrePila.charAt(0);
+    static char letraNombre(String primerNombre) {
+        return primerNombre.charAt(0);
     }
     
 /**
-* Obtiene la primer letra consonante interna del primer apellido o del apellido paterno
- param: consonanteApellidoP, primerApellido
- return: la primera letra consonante interna del primer apellido o del apellido paterno.
+* Recibe la primer consonante del apellido paterno
+ @param primerApellido,
+ @return la primera consonante del apellido paterno.
  */
     static char consonanteApellidoP(String primerApellido) {
         return primerConsonanteApellido(primerApellido);
     }
     
     /**
-     * Obtiene la primer consonante interna del segundo apellido o del apellido
-     * materno param: obtenerPrimerConsonanteInternaSegundoApellido,
-     * segundoApellido return: la primer letra consonante dentro del segundo
-     * apellido o del apellido materno.
+     * Recibe la primer consonante del apellido materno 
+     * @param  segundoApellido, 
+     * @return la primer letra consonante dentro del apellido materno.
      */
     static char consonanteApellidoM(String segundoApellido) {
         if (segundoApellido.equals("X")) {
@@ -164,10 +161,9 @@ public class Curp {
     }
     
 /**
-* Obtiene fecha de nacimiento partiendo del dia, mes, año
-* param: obtenerFecha, dia, mes, anio
-* return: dos dígitos para el día, mes y año correspondientes de los datos ingresados.
-    Acá se mencionaba que eran 2 dígitos para el día, para el mes y año, no sé si lo habrás puesto
+* Recibe la fecha de nacimiento el dia, mes, año
+* @param dia, mes, anio
+* @return dos dígitos para el día, mes y año correspondientes de los datos ingresados.
  */
     public static String fechaNacimiento(String dia, String mes, int anio) {
         String anioString = "" + anio;
@@ -175,9 +171,9 @@ public class Curp {
         return anioString.charAt(2) + "" + anioString.charAt(3) + mes + dia;
     }
 /**
-* Establece cada código de cada estado equivalente a la pertenencia de cada individuo.
-* param: obtenerCodigoEstado
-* return: el código hecho en dos cifras para determinar la pertenencia del individuo.
+* Establece cada clave de cada estado corresponde a la entidad de nacimiento.
+* @param estado
+* @return la clave hecho en dos cifras para determinar la pertenencia del individuo.
  */
     public static String claveEstado(String estado) {
         switch (estado) {
@@ -252,6 +248,11 @@ public class Curp {
         }
     }
     
+    /**
+     * Recibimos los enumeradores para determinar el caracter del sexo
+     * @param sexo,
+     * @return el sexo en forma de caracter
+     */
     static char sexo(Sexo sexo){
         switch (sexo) {
             case HOMBRE:
@@ -263,9 +264,9 @@ public class Curp {
         }
     }
     /**
-     *
-     * @param anio
-     * @return
+     * Recibimos el año para determinar el penultimo valor de la CURP
+     * @param anio,
+     * @return el penultimo valor de la curp dependiendo del año nacido
      */
     static char penultimoDigitoAnio(int anio){
         if(anio >= 2000){
@@ -274,7 +275,12 @@ public class Curp {
             return '0';
         }
     }
-    
+   
+    /**
+     * Se dividen los nombres y si uno de los dos empieza por maria o jose se salta al segundo nombre
+     * @param nombres,
+     * @return el salto de nombre al segundo si cumple con la condicion
+     */
     static String nombresCompuestos(String nombres) {
         String[] arrayNombres = nombres.split(" ");
 
